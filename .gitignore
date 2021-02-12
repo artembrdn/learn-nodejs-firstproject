@@ -2,3 +2,5 @@
 /.vscode
 /.idea
 workspace.code-workspace
+jsconfig.json
+.eslintrc.js

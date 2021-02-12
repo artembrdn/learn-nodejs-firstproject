@@ -1,5 +1,14 @@
-'use strict'
 const User = require('./user')
+const db = require('./db')
 
-const petya = new User('Петя')
-petya.hi()
+function run () {
+  db.connect()
+  const a = new User('Петя')
+  a.hi()
+}
+
+if (module.parent) {
+  module.exports.run = run
+} else {
+  run()
+}

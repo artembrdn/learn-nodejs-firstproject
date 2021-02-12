@@ -1,12 +1,12 @@
-const phrases = require('./ru')
-// exports
+const db = require('../db')
+
 class User {
   constructor (name) {
     this.name = name
   }
 
   hi () {
-    console.log(`${phrases.hello} ${this.name}`)
+    console.log(`${db.getPhrase('hi')} ${this.name}`)
   }
 }
 module.exports = User
