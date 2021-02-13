@@ -1,16 +1,19 @@
 const server = require('./server.js')
-const log = require('./logger.js')(module)
-const util = require('util')
+const User = require('./user')
+const Error_ = require('./error')
+// const log = require('./logger.js')(module)
 server.run()
 
-let test = {
-  val:1,
-  test:function tess(val){
-    console.log(val)
-  },
-  inspect: function () {
-    return 123
+try {
+  const userTest = User.readUser('{"name":"Artem","age":30}')
+  console.log(userTest)
+  userTest.hi()
+} catch (err) {
+  if (err instanceof Error_.ReadError) {
+    console.log('Ошибка чтения : ' + err.cause)
+  } else if (err instanceof Error_.DbError) {
+    console.log('Ошибка БД : ' + err.cause)
+  } else {
+    throw err
   }
 }
-console.log(util.inspect(test))
-console.log(util.format('%s %d %j', 'str', 5345, test))
