@@ -17,4 +17,10 @@ jobParser.addListener('data', (mess) => {
   console.log(mess)
 })
 
+jobParser.addListener('data', (mess) => {
+  console.log('__' + mess)
+})
+
 jobParser.action('test data')
+
+console.log(process.memoryUsage().heapUsed)
