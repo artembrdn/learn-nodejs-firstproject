@@ -1,24 +1,28 @@
 const http = require('http')
-const User = require('./user')
-const db = require('./db')
+const url = require('url')
+// const User = require('./user')
+// const db = require('./db')
 
 function run () {
-  // db.connect()
-  // const a = new User('Петя')
-  // a.hi()
 
   const server = new http.Server()
   server.listen(8888, '127.0.0.1')
 
-  let counter = 0
-  let emit = server.emit
-  server.emit = function (ev) {
-    console.log(ev)
-    emit.apply(server, arguments)
-  }
-
   server.on('request', (req, res) => {
-    res.end('Привет в ' + counter++ + ' раз')
+    let urlParsed  = new url.URL(req.url, 'http://' + req.headers.host + '/')
+    console.log(req.headers)
+
+    res.setHeader('Cache-control', 'no-cache')
+    res.setHeader('Content-Type', ' text/html; charset=utf-8')
+
+    
+    if(urlParsed.pathname === '/echo') {
+      res.statusCode = 200
+      res.end(urlParsed.searchParams.get('message'))
+    } else{
+      res.statusCode = 404
+      res.end('Страница не найдена')
+    }
   })
 }
 
