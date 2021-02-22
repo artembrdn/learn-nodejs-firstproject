@@ -4,3 +4,4 @@
 workspace.code-workspace
 jsconfig.json
 .eslintrc.js
+/files
