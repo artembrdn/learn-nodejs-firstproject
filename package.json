@@ -19,6 +19,7 @@
     "eslint-plugin-promise": "^4.2.1"
   },
   "dependencies": {
+    "mime": "^2.5.2",
     "node-fetch": "^2.6.1"
   }
 }
