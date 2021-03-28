@@ -42,7 +42,7 @@ function sendFile (filePath, fileName, attachment, res) {
 
   file.pipe(res)
   file.on('open', () => {
-    console.log('open')
+    // console.log('open')
     const fileMime = mime.getType(filePath)
     res.writeHead(200, {
       'Content-Type': fileMime + '; charset=utf-8'
@@ -66,10 +66,10 @@ function sendFile (filePath, fileName, attachment, res) {
     }
   })
   file.on('close', () => {
-    console.log('file close')
+    // console.log('file close')
   })
   res.on('close', () => {
-    console.log('res close')
+    // console.log('res close')
     file.destroy()
   })
   res.on('error', () => {
